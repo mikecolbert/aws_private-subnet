@@ -4,7 +4,7 @@ Create public and private subnets inside of a named VPC. After creating the subn
 ### Step 1: Create a VPC
 Create a VPC.
 
-![Creating a VPC](/images/create-vpc.jpg)
+![Creating a VPC](/images/vpc.jpg)
 
 * A. From the AWS console, under **Networking and Content Delivery**, choose **VPC**
 * B. In the left menu, click **Your VPCs** and then choose **Create VPC**
@@ -18,7 +18,7 @@ Create a VPC.
 ### Step 2: Create a public subnet
 Create a public subnet inside of your new VPC.
 
-![Creating a public subnet](/images/create-subnet.jpg)
+![Creating subnets](/images/subnets.jpg)
 
 * A. From the VPC console, click **Subnets** in the left menu
 * B. Choose **Create subnet**
@@ -45,7 +45,7 @@ Create a private subnet inside of your new VPC.
 ### Step 4: Create a public route table
 Create a public route table.
 
-![Creating a public route table](/images/create-route-table.jpg)
+![Creating route tables](/images/route-tables.jpg)
 
 * A. From the VPC console, click **Route Tables** in the left menu
 * B. Choose **Create route table**
@@ -68,7 +68,7 @@ Create a private route table.
 ### Step 6: Create an Internet gateway
 Create an Internet gateway.
 
-![Creating an internet gateway](/images/create-internet-gateway.jpg)
+![Creating an internet gateway](/images/igw.jpg)
 
 * A. From the VPC console, click **Internet Gateways** in the left menu
 * B. Choose **Create internet gateway**
@@ -79,6 +79,7 @@ Create an Internet gateway.
 * F. Under the **Actions** menu, choose **Attach to VPC**
 * G. Choose the VPC you created in Step 1 and click **Attach internet gateway**
 
+***
 
 ### Step 7: Edit public route table
 Tell the public route table to use your new internet gateway to go to the Internet.
@@ -97,7 +98,7 @@ Tell the public route table to use your new internet gateway to go to the Intern
 ### Step 8: Create a NAT gateway
 Create a NAT gateway in the public subnet.
 
-![Creating a NAT gateway](/images/create-nat-gateway.jpg)
+![Creating a NAT gateway](/images/nat-gw.jpg)
 
 
 * A. From the VPC console, click **NAT Gateways** in the left menu
@@ -131,6 +132,8 @@ Tell private route table to use NAT gateway.
 
 ### Step 10: Create a public server
 Create a public Linux EC2 instance in the **public** subnet. 
+
+![Creating public and private hosts](/images/hosts.jpg)
 
 During Step 3: Configure Instance Details make the following changes:
 * A. Network: *choose your VPC*
