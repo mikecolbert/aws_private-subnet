@@ -28,6 +28,7 @@ Create a public subnet inside of your new VPC.
 * F. Use *10.0.1.0/24* for **IPv4 CIDR block**
 * G. Click **Create**
 
+***
 
 ### Step 3: Create a private subnet
 Create a private subnet inside of your new VPC.
@@ -39,6 +40,7 @@ Create a private subnet inside of your new VPC.
 * E. Use *10.0.2.0/24* for **IPv4 CIDR block**
 * F. Click **Create**
 
+***
 
 ### Step 4: Create a public route table
 Create a public route table.
@@ -51,6 +53,7 @@ Create a public route table.
 * D. Choose the VPC you created in Step 1.
 * E. Click **Create**
 
+***
 
 ### Step 5: Create a private route table
 Create a private route table.
@@ -59,6 +62,8 @@ Create a private route table.
 * B. For **Name tag** enter *hawkid-private-rt* (i.e. colbert-private-rt)
 * C. Choose the VPC you created in Step 1.
 * D. Click **Create**
+
+***
 
 ### Step 6: Create an Internet gateway
 Create an Internet gateway.
