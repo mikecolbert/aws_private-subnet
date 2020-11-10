@@ -4,7 +4,7 @@ Create public and private subnets inside of a named VPC. After creating the subn
 ### Step 1: Create a VPC
 Create a VPC.
 
-![Creating a VPC](https://github.com/mikecolbert/aws_private-subnet/blob/main/create-vpc.jpg?raw=true)
+![Creating a VPC](https://github.com/mikecolbert/aws_private-subnet/raw/main/images/create-vpc.jpg?raw=true)
 
 A. From the AWS console, under **Networking and Content Delivery**, choose **VPC**
 B. In the left menu, click **Your VPCs** and then choose **Create VPC**
