@@ -1,11 +1,23 @@
 # aws_private-subnet
-Creating a public and private subnet inside of a VPC
+Create public and private subnets inside of a named VPC. After creating the subnets you will create EC2 instances in each and connect to them via SSH. The instance in your public subnet will act as a bastion host, allowing you to connect to the EC2 instance in the private subnet.
 
 ### Step 1: Create a VPC
 Create a VPC.
 
+![Creating a VPC](https://github.com/mikecolbert/aws_private-subnet/blob/main/create-vpc.jpg?raw=true)
+
+A. From the AWS console, under **Networking and Content Delivery**, choose **VPC**
+B. In the left menu, click **Your VPCs** and then choose **Create VPC**
+C. For **Name tag** enter *hawkid_vpc* (i.e. colbert_vpc)
+D. For **IPv4 CIDR block**, use *10.0.0.0/16*
+E. **Tenancy** should be left as *Default*
+F. Click **Create VPC**
+
+***
+
 ### Step 2: Create a public subnet
 Create a public subnet.
+
 
 ### Step 3: Create a private subnet
 Create a private subnet.
