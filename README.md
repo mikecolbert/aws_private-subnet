@@ -179,7 +179,7 @@ scp -r -i "colbert-vpc.pem" /Users/mikec/Desktop/key/colbert-vpc.pem ec2-user@54
 ```
 
 * E. Copy the private key from your computer (Windows) to your public EC2 instance.
-* * i. Download Putty SCP
+* * i. Download Putty SCP - https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
 ```
 pscp -i c:\users\mikec\Desktop\colbert-vpc.ppk -r -P 22 c:\users\mikec\Desktop\colbert-vpc.pem ec2-user@54.227.106.201:/home/ec2-user
 ```
