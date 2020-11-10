@@ -1,4 +1,4 @@
-# aws_private-subnet
+# Creating Public and Private Subnets in AWS
 Create public and private subnets inside of a named VPC. After creating the subnets you will create EC2 instances in each and connect to them via SSH. The instance in your public subnet will act as a bastion host, allowing you to connect to the EC2 instance in the private subnet.
 
 ### Step 1: Create a VPC
@@ -81,35 +81,118 @@ Create an Internet gateway.
 
 
 ### Step 7: Edit public route table
-Tell pubic route table to use Internet gateway.
+Tell the public route table to use your new internet gateway to go to the Internet.
+
+* A. From the VPC console, click **Route Tables** in the left menu
+* B. Click your public route table to choose it
+* C. In the route table details below, choose the **Routes** tab.
+* D. Click **Edit routes**
+* E. Click **Add route**. Destination = 0.0.0.0/0 and Target = internet gateway, then choose your gateway
+* F. Choose **Save routes**
+* G. Choose the **Subnet Associations** tab. Click **Edit subnet associations**.
+* H. Choose your **public** subnet and click **Save**
+
+***
 
 ### Step 8: Create a NAT gateway
 Create a NAT gateway in the public subnet.
 
+![Creating a NAT gateway](/images/create-nat-gateway.jpg)
+
+
+* A. From the VPC console, click **NAT Gateways** in the left menu
+* B. Click **Create NAT gateway**
+* C. For **Name tag** enter *hawkid-nat-gw* (i.e. colbert-nat-gw)
+* D. For **Subnet** choose your public subnet
+* E. Click **Allocate Elastic IP** to create an Elastic IP for the gateway
+* F. Choose **Create NAT gateway**
+
+* G. After the NAT gateway is created, refresh the page and select it.
+* H. On the **Details** tab below, click on the **Network Interface ID** link
+* I. When the network interface opens, edit the name to be *hawkid-nat-net-if* (i.e. colbert-nat-net-if)
+* J. In the **Details** tab below, click the **IPv4 Public IP** IP address. A popup will open, click the IP address again.
+* K. Now that the Elastic IP addresses window is open, name your Elastic IP as *hawkid-nat-eIP* (i.e. colbert-nat-eIP)
+
+***
+
 ### Step 9: Edit private route table
 Tell private route table to use NAT gateway.
 
+* A. From the VPC console, click **Route Tables** in the left menu
+* B. Click your private route table to choose it
+* C. In the route table details below, choose the **Routes** tab.
+* D. Click **Edit routes**
+* E. Click **Add route**. Destination = 0.0.0.0/0 and Target = NAT Gateway, then choose your NAT gateway
+* F. Choose **Save routes**
+* G. Choose the **Subnet Associations** tab. Click **Edit subnet associations**.
+* H. Choose your **private** subnet and click **Save**
+
+***
+
 ### Step 10: Create a public server
-Create a public Linux EC2 instance. Be sure to include public IP check.
-Edit security group
+Create a public Linux EC2 instance in the **public** subnet. 
+
+During Step 3: Configure Instance Details make the following changes:
+* A. Network: *choose your VPC*
+* B. Subnet: *choose your public subnet*
+* C. Auto-assign Public IP: *Enable*
+
+During Step 5: Add Tags name your server
+* D. **Add Tags** -- Key: Name ; Value: *hawkid-public-svr* (i.e. colbert-public-svr)
+
+During Step 6: Configure Security Group
+* E. Name: *hawkid-public-svr-sg* (i.e. colbert-public-svr-sg)
+* F. Description: *hawkid VPC public server security group*
+* G. SSH - TCP - 22 - My IP -- *your ip address/32* - SSH from my computer
+
+***
 
 ### Step 11: Create a private server
-Create a Linux EC2 instance in the private subnet.
+Create a Linux EC2 instance in the **private** subnet.
+
+During Step 3: Configure Instance Details make the following changes:
+* A. Network: *choose your VPC*
+* B. Subnet: *choose your private subnet*
+* C. Auto-assign Public IP: *Disable*
+
+During Step 5: Add Tags name your server
+* D. **Add Tags** -- Key: Name ; Value: *hawkid-private-svr* (i.e. colbert-private-svr)
+
+During Step 6: Configure Security Group
+* E. Name: *hawkid-private-svr-sg* (i.e. colbert-private-svr-sg)
+* F. Description: *hawkid VPC private server security group*
+* G. SSH - TCP - 22 - custom -- *10.0.1.0/24* - SSH from my public subnet
+
+***
 
 ### Step 12: SSH from your computer to your public server
-Yum check-update and update to prove connectivity
-curl https://google.com
-Copy the private key from your computer (Mac) to this new EC2 instance.
+
+* A. SSH into your **public** server.
+* B. If you were successful, your security group and interenet gateway is working correctly.
+
+* C. Run `sudo yum check-update` then `sudo yum update`
+* D. If the server updated, you have Internet connectivity outbound and your public route table and internet gateway are working correctly.
+
+* E. Copy the private key from your computer (Mac) to your public EC2 instance.
 ```
 scp -r -i "colbert-vpc.pem" /Users/mikec/Desktop/key/colbert-vpc.pem ec2-user@54.83.101.33:~/ 
 ```
-Also, investigate pass-through SSH
 
-### Step 12: SSH from the public server to your private server
-Yum check-update and update to prove connectivity
-curl https://google.com
+* E. Copy the private key from your computer (Windows) to your public EC2 instance.
+* * i. Download Putty SCP
+```
+pscp -i c:\users\mikec\Desktop\colbert-vpc.ppk -r -P 22 c:\users\mikec\Desktop\colbert-vpc.pem ec2-user@54.227.106.201:/home/ec2-user
+```
 
+***
 
+### Step 13: SSH from the public server to your private server
+* A. SSH into your **private** server.
+` ssh -i "colbert-vpc.pem" ec2-user@54.227.106.201`
+* B. If you were successful, your security group and private route table is working correctly.
+
+* C. Run `sudo yum check-update` then `sudo yum update`
+* D. If the server updated, you have Internet connectivity outbound and your private route table and NAT gateway are working correctly.
 
 
 
