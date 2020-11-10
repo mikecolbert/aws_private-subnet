@@ -198,5 +198,14 @@ pscp -i c:\users\mikec\Desktop\colbert-vpc.ppk -r -P 22 c:\users\mikec\Desktop\c
 * D. If the server updated, you have Internet connectivity outbound and your private route table and NAT gateway are working correctly.
 
 
+***
+
+
+### Delete and Cleanup
+* A. Terminate your EC2 instances
+* B. Delete your NAT gateway
+* C. Delete your subnets
+* D. Delete your VPC - also deletes your route tables and Internet gateway
+* E. Release your Elastic IP 
 
 
