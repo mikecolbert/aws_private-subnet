@@ -178,7 +178,7 @@ During Step 6: Configure Security Group
 
 * E. Copy the private key from your computer (Mac) to your public EC2 instance.
 ```
-scp -r -i "colbert-vpc.pem" /Users/mikec/Desktop/key/colbert-vpc.pem ec2-user@54.83.101.33:~/ 
+scp -r -i "colbert-public-key.pem" /Users/mikec/Desktop/key/colbert-private-key.pem ec2-user@54.83.101.33:~/ 
 ```
 
 * E. Copy the private key from your computer (Windows) to your public EC2 instance.
